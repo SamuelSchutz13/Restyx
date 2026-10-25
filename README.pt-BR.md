@@ -12,6 +12,10 @@
   Um cliente de REST API no navegador: coleções, ambientes com segredos, histórico e exportação. Roda na sua máquina, sem conta, sem telemetria e sem IA.
 </p>
 
+<p align="center">
+  <img src=".github/assets/requests.png" alt="Tela de requisições do Restyx: coleção com os métodos coloridos à esquerda, o editor com o cabeçalho Authorization oculto no meio e a resposta JSON com destaque à direita" />
+</p>
+
 > [!NOTE]
 > **Nada sai da sua máquina além das requisições que você envia.** O servidor escuta só em `127.0.0.1`, a página exige um token aleatório e não há telemetria, conta, CDN nem fonte remota.
 
@@ -22,6 +26,31 @@
 - **Histórico**: o que você enviou nesta sessão, só em memória, apagado quando o Restyx é encerrado.
 - **Exportar**: a coleção em JSON ou em comandos cURL, sem os segredos, a menos que você os inclua.
 - **Configurações**: português e inglês, temas escuro e claro, e ocultação de cabeçalhos de credenciais na tela.
+
+## Telas
+
+**Seletor de método**: cada método com sua cor, no tema da página.
+
+<p align="center"><img src=".github/assets/method.png" alt="Dropdown de método aberto com GET, POST, PUT, PATCH, DELETE, HEAD e OPTIONS nas suas cores" /></p>
+
+**Histórico**: o que foi enviado nesta sessão, com status, tempo e tamanho; as credenciais continuam ocultas.
+
+<p align="center"><img src=".github/assets/history.png" alt="Tela de histórico com seis requisições e um 404 aberto no inspetor" /></p>
+
+**Ambientes**: variáveis secretas mostram só que há um valor guardado.
+
+<p align="center"><img src=".github/assets/environments.png" alt="Tela de ambientes com duas variáveis secretas marcadas como guardadas" /></p>
+
+**Configurações**: idioma, tema e privacidade num lugar só.
+
+<p align="center"><img src=".github/assets/settings.png" alt="Menu de configurações com idioma, tema e a opção de ocultar credenciais" /></p>
+
+**Tema claro** e **inglês**:
+
+<p align="center">
+  <img src=".github/assets/requests-light.png" alt="Tela de requisições no tema claro" width="49%" />
+  <img src=".github/assets/requests-en.png" alt="Tela de requisições em inglês com corpo JSON e resposta 201" width="49%" />
+</p>
 
 ## Privacidade e segurança
 
