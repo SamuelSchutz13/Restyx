@@ -5,17 +5,16 @@ import { Empty, Hint, Section, UnderlineTabs } from '@/components/kit';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
-import { BODY_TYPES, METHODS, type RequestDef, type SendOptions, type Workspace } from '../../server/shared/types';
+import { BODY_TYPES, type RequestDef, type SendOptions, type Workspace } from '../../server/shared/types';
 import { useT } from '../lib/i18n';
 import { isSensitive, useSettings } from '../lib/settings';
 import { newRequest } from '../lib/workspace';
 import { Frame } from './Frame';
-import { KVEditor, MethodChip } from './chips';
+import { KVEditor, MethodChip, MethodSelect } from './chips';
 import { ResponseView, type Result } from './ResponseView';
 
 type Tab = 'params' | 'headers' | 'body' | 'options';
 const BODY_LABEL: Record<RequestDef['bodyType'], string> = { none: 'Nenhum', json: 'JSON', text: 'Texto' };
-const select = 'h-9 rounded-md border border-input bg-transparent px-2 font-mono text-[13px] outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 dark:bg-input/30';
 
 export function RequestView(props: {
   ws: Workspace;
@@ -93,9 +92,7 @@ export function RequestView(props: {
       <div className="mx-auto max-w-4xl space-y-3">
         <Input value={req.name} onChange={(e) => edit({ name: e.target.value })} aria-label={t('Nome')} className="h-8 border-transparent bg-transparent px-1 text-[15px] font-medium shadow-none dark:bg-transparent" />
         <form className="flex gap-2" onSubmit={(e) => { e.preventDefault(); send(); }}>
-          <select value={req.method} onChange={(e) => edit({ method: e.target.value as RequestDef['method'] })} aria-label={t('Método')} className={select}>
-            {METHODS.map((m) => <option key={m} value={m}>{m}</option>)}
-          </select>
+          <MethodSelect value={req.method} onChange={(method) => edit({ method })} label={t('Método')} />
           <Input value={req.url} onChange={(e) => edit({ url: e.target.value })} placeholder="https://api.exemplo.com/users ou {{base}}/users" aria-label="URL" spellCheck={false} className="flex-1 font-mono text-[13px]" />
           <Button type="submit" disabled={sending || !req.url.trim()}>
             {sending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />} {t('Enviar')}

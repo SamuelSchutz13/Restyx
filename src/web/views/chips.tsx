@@ -1,14 +1,50 @@
-import { Plus, Trash2 } from 'lucide-react';
+import { Check, ChevronDown, Plus, Trash2 } from 'lucide-react';
+import { DropdownMenu } from 'radix-ui';
+import { cn } from 'cn';
 import { Chip, type Tone } from '@/components/kit';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
-import type { KeyValue, Method } from '../../server/shared/types';
+import { METHODS, type KeyValue, type Method } from '../../server/shared/types';
 import { useT } from '../lib/i18n';
 
 const METHOD_TONE: Record<Method, Tone> = { GET: 'success', POST: 'warning', PUT: 'info', PATCH: 'violet', DELETE: 'danger', HEAD: 'neutral', OPTIONS: 'neutral' };
 
 export function MethodChip({ method }: { method: Method }) {
   return <Chip tone={METHOD_TONE[method]} mono className="w-14 justify-center">{method === 'OPTIONS' ? 'OPT' : method === 'DELETE' ? 'DEL' : method}</Chip>;
+}
+
+const METHOD_TEXT: Record<Tone, string> = { success: 'text-success', warning: 'text-warning', info: 'text-info', violet: 'text-[#b083f0]', danger: 'text-destructive', neutral: 'text-fg-2' };
+
+/** Themed method picker: a native <select> opens an OS-drawn list that ignores the dark theme. */
+export function MethodSelect({ value, onChange, label }: { value: Method; onChange(m: Method): void; label: string }) {
+  return (
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger
+        aria-label={label}
+        className={cn(
+          'flex h-9 w-28 shrink-0 items-center justify-between gap-1 rounded-md border border-input bg-transparent px-2.5 font-mono text-[13px] font-semibold outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 dark:bg-input/30',
+          METHOD_TEXT[METHOD_TONE[value]],
+        )}
+      >
+        {value}
+        <ChevronDown className="size-3.5 text-muted-foreground" aria-hidden />
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content align="start" sideOffset={4} className="z-50 min-w-28 rounded-md border bg-popover p-1 text-popover-foreground shadow-md">
+          {METHODS.map((m) => (
+            <DropdownMenu.Item
+              key={m}
+              onSelect={() => onChange(m)}
+              className={cn('flex cursor-pointer items-center justify-between gap-2 rounded px-2 py-1.5 font-mono text-[13px] font-semibold outline-none data-[highlighted]:bg-accent', METHOD_TEXT[METHOD_TONE[m]])}
+            >
+              {m}
+              {m === value && <Check className="size-3.5" aria-hidden />}
+            </DropdownMenu.Item>
+          ))}
+        </DropdownMenu.Content>
+      </DropdownMenu.Portal>
+    </DropdownMenu.Root>
+  );
 }
 
 export const statusTone = (s: number | null): Tone => (s === null ? 'danger' : s < 300 ? 'success' : s < 400 ? 'info' : s < 500 ? 'warning' : 'danger');
