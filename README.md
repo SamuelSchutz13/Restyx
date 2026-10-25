@@ -22,6 +22,10 @@
   <img alt="No telemetry" src="https://img.shields.io/badge/telemetry-none-34d399" />
 </p>
 
+<p align="center">
+  <img src=".github/assets/requests.png" alt="Restyx requests view: collection with colored methods on the left, the request editor with a masked Authorization header in the middle, and the highlighted JSON response on the right" />
+</p>
+
 > [!NOTE]
 > **Nothing leaves your machine except the requests you send.** The server listens on `127.0.0.1` only, the page needs a random token, and there is no telemetry, account, CDN or remote font.
 
@@ -32,6 +36,31 @@
 - **History**: what you sent in this session, kept only in memory and erased when Restyx stops.
 - **Export**: the collection as JSON or as cURL commands, with secrets left out unless you include them.
 - **Settings**: English and Portuguese (Brazil), dark and light themes, and masking of credential headers on screen.
+
+## Screenshots
+
+**Method picker**: each method in its own color, in the theme of the page.
+
+<p align="center"><img src=".github/assets/method.png" alt="Method dropdown open with GET, POST, PUT, PATCH, DELETE, HEAD and OPTIONS in their colors" /></p>
+
+**History**: what was sent in this session, with status, time and size; credentials stay masked.
+
+<p align="center"><img src=".github/assets/history.png" alt="History view with six requests and a 404 open in the inspector" /></p>
+
+**Environments**: secret variables show only that a value is stored.
+
+<p align="center"><img src=".github/assets/environments.png" alt="Environments view with two secret variables marked as stored" /></p>
+
+**Settings**: language, theme and privacy in one place.
+
+<p align="center"><img src=".github/assets/settings.png" alt="Settings popover with language, theme and the hide credentials switch" /></p>
+
+**Light theme** and **English**:
+
+<p align="center">
+  <img src=".github/assets/requests-light.png" alt="Requests view in the light theme" width="49%" />
+  <img src=".github/assets/requests-en.png" alt="Requests view in English with a JSON body and a 201 response" width="49%" />
+</p>
 
 ## Privacy and security
 
