@@ -56,6 +56,16 @@ describe('App', () => {
     expect(screen.queryByText('sid=123')).not.toBeInTheDocument();
   });
 
+  it('changes the method from the themed dropdown', async () => {
+    location.hash = '';
+    render(<App />);
+    fireEvent.click(await screen.findByText('Listar usuários'));
+    const trigger = screen.getByRole('button', { name: 'Método' });
+    fireEvent.keyDown(trigger, { key: 'Enter' });
+    fireEvent.click(await screen.findByRole('menuitem', { name: 'POST' }));
+    expect(screen.getByRole('button', { name: 'Método' })).toHaveTextContent('POST');
+  });
+
   it('never shows stored secret values', async () => {
     location.hash = '#environments';
     render(<App />);
